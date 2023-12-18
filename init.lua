@@ -31,38 +31,38 @@ Guns4d.ammo.register_bullet({
     raw_sharp_damage = 5        --the sharp damage at the sharp_penetration value. Sharp pen will likely not be at this value.
 })
 
-minetest.register_tool("guns4d_pack_1:m4a1", {
-    description = "M4A1 carbine (5.56x45mm)",
+minetest.register_tool("guns4d_pack_1:m4", {
+    description = "M4 carbine (5.56x45mm)",
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "m4a1_inv.png"
 })
 Guns4d.gun:inherit({
-    name = "guns4d_pack_1:m4a1",
-    itemstring = "guns4d_pack_1:m4a1",
+    name = "guns4d_pack_1:m4",
+    itemstring = "guns4d_pack_1:m4",
     properties = {
         visuals = {
-            mesh = "m4a1.b3d",
+            mesh = "m4.b3d",
             animations = {
                 empty = {x=0,y=0},
                 loaded = {x=1,y=1},
                 unload = {x=2, y=33},
                 load = {x=34, y=74},
-                fire = {x=75, y=82}
+                fire = {x=1, y=6}
             },
         },
         crosshair = Guns4d.dynamic_crosshair,
         --sprite_scope = Guns4d.sprite_scope,
         firerateRPM = 1000,
         hip = {
-            offset = vector.new(-.22,.1,.4),
+            offset = vector.new(-.22,.1,.3),
         },
         ads = {
-            offset = vector.new(0,0,.465),
+            offset = vector.new(0,0,.3),
             horizontal_offset = .1,
             aim_time = .3
         },
         textures = {
-            "cz527_pallete.png"
+            "m4.png"
         },
         sway = {
             max_angle = {player_axial=1, gun_axial=.15},
@@ -165,6 +165,7 @@ Guns4d.gun:inherit({
     itemstring = "guns4d_pack_1:awm",
     properties = {
         visuals = {
+            backface_culling = false,
             mesh = "awm.b3d",
             animations = {
                 empty = {x=0,y=0},
