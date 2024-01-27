@@ -22,7 +22,7 @@ minetest.register_craftitem("guns4d_pack_1:556", {
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:556",
-    range = 400,
+    range = 200,
     energy_dropoff = 4,      --the dropoff of energy per meter. This will cause penetration dropoff for both blunt and sharp.
     energy = 1709,          --energy in joules, this is used for blunt->calculation based on blunt_penetration value.
     sharp_penetration = 15, --sharp penetration is in mmRHA
@@ -34,7 +34,7 @@ Guns4d.ammo.register_bullet({
 minetest.register_tool("guns4d_pack_1:m4", {
     description = "M4 carbine (5.56x45mm)",
     wield_scale = {x=.5, y=.5, z=.5},
-    inventory_image = "m4a1_inv.png"
+    inventory_image = "m4_inv.png"
 })
 Guns4d.gun:inherit({
     name = "guns4d_pack_1:m4",
@@ -45,12 +45,21 @@ Guns4d.gun:inherit({
             animations = {
                 empty = {x=0,y=0},
                 loaded = {x=1,y=1},
-                unload = {x=2, y=33},
-                load = {x=34, y=74},
+                unload = {x=8, y=19},
+                store = {x=20, y=30},
+                load = {x=31, y=50},
+                charge  = {x=61, y=76},
+                charge2 = {x=50, y=60},
                 fire = {x=1, y=6}
             },
         },
+        firemodes = {
+            "single", --not limited to semi-automatic.
+            "burst",
+            --"auto"
+        },
         crosshair = Guns4d.dynamic_crosshair,
+        inventory_image_magless = "m4_inv_empty.png",
         --sprite_scope = Guns4d.sprite_scope,
         firerateRPM = 1000,
         hip = {
@@ -76,7 +85,7 @@ Guns4d.gun:inherit({
                 player_axial = 1
             }
         },
-        flash_offset = vector.new(0, -.086, .56),
+        flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             velocity_correction_factor = {
                 gun_axial = 1,
@@ -110,8 +119,10 @@ Guns4d.gun:inherit({
             accepted_magazines = {"guns4d_pack_1:stanag"}
         },
         reload = {
-            {type="unload", time=.5, anim="unload", interupt="to_ground", hold = true},
-            {type="load", time=1, anim="load"}
+            {type="unload_mag", time=.25, anim="unload", sounds = {sound="ar_mag_unload"}},
+            {type="store", time=.5, anim="store", sounds = {sound="ar_mag_store"}},
+            {type="load", time=.5, anim="load", sounds = {sound="ar_mag_load"}},
+            {type="charge", time=.5, anim="charge2"}
         },
     },
     consts = {
@@ -172,7 +183,8 @@ Guns4d.gun:inherit({
                 loaded = {x=1,y=1},
                 unload = {x=2, y=33},
                 load = {x=34, y=74},
-                fire = {x=11, y=53}
+                fire = {x=11, y=53},
+                charge  = {x=61, y=76}
             },
         },
         crosshair = Guns4d.dynamic_crosshair,
@@ -235,13 +247,13 @@ Guns4d.gun:inherit({
             accepted_magazines = {"guns4d_pack_1:stanag"}
         },
         reload = {
-            {type="unload", time=.5, anim="unload", interupt="to_ground", hold = true},
+            {type="unload", time=.25, anim="unload", interupt="to_ground", hold = true},
             {type="load", time=1, anim="load"}
         },
     },
     consts = {
         HAS_BREATHING = true,
-        KEYFRAME_SAMPLE_PRECISION = .5, -- has to be more precise for the bolt cycle animation
+        KEYFRAME_SAMPLE_PRECISION = 1, -- has to be more precise for the bolt cycle animation
         DEFAULT_FPS = 40,
         ANIMATIONS_OFFSET_AIM = true,
     }
