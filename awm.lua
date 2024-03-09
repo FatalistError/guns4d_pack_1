@@ -167,7 +167,6 @@ Guns4d.gun:inherit({
         },
     },
     consts = {
-        HAS_BREATHING = true,
         KEYFRAME_SAMPLE_PRECISION = 1, -- has to be more precise for the bolt cycle animation
         DEFAULT_FPS = 24,
         ANIMATIONS_OFFSET_AIM = true,
