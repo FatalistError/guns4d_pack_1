@@ -57,6 +57,7 @@ Guns4d.gun:inherit({
                 chamber = {x=17, y=37}
             },
         },
+        inventory_image_magless = "awm_inv_empty.png",
         crosshair = Guns4d.dynamic_crosshair,
         sprite_scope = awm_scope,
         firerateRPM = 60/1.1,

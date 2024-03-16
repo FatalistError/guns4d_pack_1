@@ -1,25 +1,25 @@
-minetest.register_tool("guns4d_pack_1:m4", {
-    description = "M4 carbine (5.56x45mm)",
+minetest.register_tool("guns4d_pack_1:glock21", {
+    description = "Glock .45 ACP",
     wield_scale = {x=.5, y=.5, z=.5},
-    inventory_image = "m4_inv.png"
+    inventory_image = "glock21_inv.png"
 })
-Guns4d.gun:inherit({
-    name = "guns4d_pack_1:m4",
-    itemstring = "guns4d_pack_1:m4",
+local glock = Guns4d.gun:inherit({
+    name = "guns4d_pack_1:glock21",
+    itemstring = "guns4d_pack_1:glock21",
     properties = {
         visuals = {
+            root = "glock21",
+            mesh = "glock21.b3d",
             backface_culling = false,
-            root = "m4",
-            mesh = "m4.b3d",
             animations = {
                 empty = {x=0,y=0},
                 loaded = {x=1,y=1},
-                unload = {x=8, y=19},
-                store = {x=20, y=30},
-                load = {x=31, y=50},
-                draw  = {x=61, y=76},
-                charge = {x=50, y=60},
-                fire = {x=1, y=6}
+                unload = {x=52, y=60},
+                store = {x=61, y=75},
+                load = {x=76, y=120},
+                charge2 = {x=120, y=141},
+                draw  = {x=16, y=51},
+                fire = {x=1, y=14}
             },
         },
         sounds = {
@@ -53,28 +53,27 @@ Guns4d.gun:inherit({
         },
         firemodes = {
             "single",
-            "burst",
         },
         crosshair = Guns4d.dynamic_crosshair,
-        inventory_image_magless = "m4_inv_empty.png",
+        inventory_image_magless = "glock21_inv_empty.png",
         firerateRPM = 1000,
         hip = {
             offset = vector.new(-.22,.1,.3),
         },
         ads = {
-            offset = vector.new(0,0,.3),
+            offset = vector.new(0,0,.25),
             horizontal_offset = .1,
             aim_time = .3
         },
         textures = {
-            "m4.png"
+            "glock21.png"
         },
         sway = {
-            max_angle = {player_axial=1, gun_axial=.15},
-            angular_velocity = {player_axial=.1, gun_axial=.1},
+            max_angle = {player_axial=2, gun_axial=.35},
+            angular_velocity = {player_axial=.6, gun_axial=.6},
             hipfire_velocity_multiplier = { --same as above but for velocity.
-                gun_axial = 4,
-                player_axial = 6
+                gun_axial = 2,
+                player_axial = 2
             },
             hipfire_angle_multiplier = { --same as above but for velocity.
                 gun_axial = 2,
@@ -96,30 +95,30 @@ Guns4d.gun:inherit({
                 player_axial = 2,
             },
             angular_velocity = {
-                gun_axial = {x=.4, y=.4},
-                player_axial = {x=.5, y=.5},
+                gun_axial = {x=.7, y=.8},
+                player_axial = {x=.8, y=.8},
             },
             bias = {
-                gun_axial = {x=1, y=0},
-                player_axial = {x=.4, y=0},
+                gun_axial = {x=.15, y=0},
+                player_axial = {x=.6, y=0},
             },
             target_correction_max_rate = { --the cap for time_since_fire*target_correction_factor
-                gun_axial = 100,
-                player_axial = 100,
+                gun_axial = 40,
+                player_axial = 40,
             },
         },
         walking_offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
         ammo = {
             magazine_only = true,
-            accepted_bullets = {"guns4d_pack_1:556"},
-            accepted_magazines = {"guns4d_pack_1:stanag"}
+            accepted_bullets = {"guns4d_pack_1:45A"},
+            accepted_magazines = {"guns4d_pack_1:45mm_magazine_13"}
         },
         reload = {
-            {action="charge", time=.5, anim="charge", sounds={sound="ar_charge", delay = .2}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
-            {action="unload_mag", time=.25, anim="unload", sounds = {sound="ar_mag_unload"}},
-            {action="store", time=.5, anim="store", sounds = {sound="ar_mag_store"}},
-            {action="load", time=.5, anim="load", sounds = {sound="ar_mag_load", delay = .25}},
-            {action="charge", time=.5, anim="charge", sounds={sound="ar_charge", delay = .2}}
+            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = .2}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
+            {action="unload_mag", time=.3, anim="unload", sounds = {sound="ar_mag_unload"}},
+            {action="store", time=.2, anim="store", sounds = {sound="ar_mag_store"}},
+            {action="load", time=.6, anim="load", sounds = {sound="ar_mag_load", delay = .25}},
+            {action="charge", time=.6, anim="charge2", sounds={sound="ar_charge", delay = .2}}
         },
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,
@@ -127,7 +126,22 @@ Guns4d.gun:inherit({
             default_charge_time = 1,
         },
     },
+    custom_construct = function(self)
+        self.offsets.screen_offset = {
+            player_axial = vector.new(),
+            gun_axial = vector.new(),
+        }
+    end,
     consts = {
         HAS_BREATHING = true,
     }
 })
+local old_update = glock.update
+glock.update = function(self, dt)
+    if self.handler and self.handler.control_handler.ads then
+        self.offsets.screen_offset.player_axial.x = -4*self.handler.ads_location
+    else
+        self.offsets.screen_offset.player_axial.x = 0
+    end
+    old_update(self,dt)
+end

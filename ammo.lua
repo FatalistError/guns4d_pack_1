@@ -12,7 +12,7 @@ Guns4d.ammo.register_bullet({
     energy_dropoff = 4,
     energy = 1709,
     sharp_penetration = 13,
-    blunt_penetration = 1200,
+    blunt_penetration = 1000,
     raw_blunt_damage = 2,
     raw_sharp_damage = 5
 })
@@ -33,7 +33,22 @@ Guns4d.ammo.register_bullet({
     raw_blunt_damage = 5,       --the blunt damage at the blunt_penetration value. This means this is really setting the ratio of damage to blunt_penetration, meaning blocked sharp will do this amount of damage per the set blunt_penetration
     raw_sharp_damage = 6        --the sharp damage at the sharp_penetration value. Real damage will very if the target is armoured
 })
-
+minetest.register_craftitem("guns4d_pack_1:45A", {
+    description = ".45 ACP",
+    wield_scale = {x=.5, y=.5, z=.5},
+    stack_max = 30,
+    inventory_image = "45A.png"
+})
+Guns4d.ammo.register_bullet({
+    itemstring = "guns4d_pack_1:45A",
+    range = 200,
+    energy_dropoff = 10,
+    energy = 900,
+    sharp_penetration = 4,
+    blunt_penetration = 700,
+    raw_blunt_damage = 2,
+    raw_sharp_damage = 2
+})
 --stanag
 minetest.register_tool("guns4d_pack_1:stanag", {
     description = "STANAG mag (5.56x45mm)",
@@ -47,8 +62,6 @@ Guns4d.register_item("guns4d_pack_1:stanag", {
 Guns4d.ammo.register_magazine({
     itemstring = "guns4d_pack_1:stanag",
     capacity = 30,
-    model = "stanag.obj",
-    hot_eject = true, --lol
     accepted_bullets = {
         "guns4d_pack_1:556"
     },
@@ -56,7 +69,7 @@ Guns4d.ammo.register_magazine({
 
 --AWM
 minetest.register_tool("guns4d_pack_1:awm_magazine", {
-    description = "STANAG mag (5.56x45mm)",
+    description = "AWM mag (.338 Lupua)",
     inventory_image = "awm_mag_inv.png"
 })
 Guns4d.register_item("guns4d_pack_1:awm_magazine", {
@@ -67,9 +80,25 @@ Guns4d.register_item("guns4d_pack_1:awm_magazine", {
 Guns4d.ammo.register_magazine({
     itemstring = "guns4d_pack_1:awm_magazine",
     capacity = 7,
-    model = "stanag.obj",
-    hot_eject = true, --lol
     accepted_bullets = {
         "guns4d_pack_1:338L"
+    },
+})
+
+--glock21
+minetest.register_tool("guns4d_pack_1:45mm_magazine_13", {
+    description = "13 round glock mag (5.56x45mm)",
+    inventory_image = "glock_mag_inv.png"
+})
+Guns4d.register_item("guns4d_pack_1:45mm_magazine_13", {
+    mesh = "stanag.obj",
+    collisionbox_size = 4,
+    textures = {"stanag.png"}
+})
+Guns4d.ammo.register_magazine({
+    itemstring = "guns4d_pack_1:45mm_magazine_13",
+    capacity = 13,
+    accepted_bullets = {
+        "guns4d_pack_1:45A"
     },
 })
