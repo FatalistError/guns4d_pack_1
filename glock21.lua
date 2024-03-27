@@ -10,6 +10,7 @@ local glock = Guns4d.gun:inherit({
         visuals = {
             root = "glock21",
             mesh = "glock21.b3d",
+            magazine = "mag",
             backface_culling = false,
             animations = {
                 empty = {x=0,y=0},
@@ -25,15 +26,15 @@ local glock = Guns4d.gun:inherit({
         sounds = {
             fire = {
                 {
-                    sound = "ar_firing",
+                    sound = "glock21_firing",
                     max_hear_distance = 40, --far min_hear_distance is also this.
                     pitch = {
                         min = .8,
                         max = 1.05
                     },
                     gain = {
-                        min = .9,
-                        max = 1
+                        min = .8,
+                        max = .9
                     }
                 },
                 {
@@ -110,15 +111,15 @@ local glock = Guns4d.gun:inherit({
         walking_offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
         ammo = {
             magazine_only = true,
-            accepted_bullets = {"guns4d_pack_1:45A"},
-            accepted_magazines = {"guns4d_pack_1:45mm_magazine_13"}
+            accepted_bullets = {"guns4d_pack_1:45A"}, --first bullet default
+            accepted_magazines = {"guns4d_pack_1:45mm_magazine_13"} --first magazine will be default
         },
         reload = {
-            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = .2}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
+            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
             {action="unload_mag", time=.3, anim="unload", sounds = {sound="ar_mag_unload"}},
             {action="store", time=.2, anim="store", sounds = {sound="ar_mag_store"}},
             {action="load", time=.6, anim="load", sounds = {sound="ar_mag_load", delay = .25}},
-            {action="charge", time=.6, anim="charge2", sounds={sound="ar_charge", delay = .2}}
+            {action="charge", time=.6, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}
         },
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,
@@ -126,17 +127,17 @@ local glock = Guns4d.gun:inherit({
             default_charge_time = 1,
         },
     },
-    custom_construct = function(self)
+    --[[custom_construct = function(self)
         self.offsets.screen_offset = {
             player_axial = vector.new(),
             gun_axial = vector.new(),
         }
-    end,
+    end,]]
     consts = {
         HAS_BREATHING = true,
     }
 })
-local old_update = glock.update
+--[[local old_update = glock.update
 glock.update = function(self, dt)
     if self.handler and self.handler.control_handler.ads then
         self.offsets.screen_offset.player_axial.x = -4*self.handler.ads_location
@@ -144,4 +145,4 @@ glock.update = function(self, dt)
         self.offsets.screen_offset.player_axial.x = 0
     end
     old_update(self,dt)
-end
+end]]

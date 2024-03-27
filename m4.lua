@@ -29,7 +29,7 @@ Guns4d.gun:inherit({
                     max_hear_distance = 40, --far min_hear_distance is also this.
                     pitch = {
                         min = .8,
-                        max = 1.05
+                        max = .9
                     },
                     gain = {
                         min = .9,
@@ -131,3 +131,4 @@ Guns4d.gun:inherit({
         HAS_BREATHING = true,
     }
 })
+print(Guns4d.ammo.magazine_of_gun("guns4d_pack_1:m4", true, true))
