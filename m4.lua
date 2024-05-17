@@ -21,35 +21,47 @@ Guns4d.gun:inherit({
                 charge = {x=50, y=60},
                 fire = {x=1, y=6}
             },
+            textures = {
+                "m4.png"
+            },
         },
         sounds = {
             fire = {
                 {
                     sound = "ar_firing",
-                    max_hear_distance = 40, --far min_hear_distance is also this.
+                    max_hear_distance = 35, --far min_hear_distance is also this.
                     pitch = {
                         min = .8,
                         max = .9
                     },
                     gain = {
-                        min = .9,
-                        max = 1
-                    }
+                        min = .5,
+                        max = .6
+                    },
+                    attenuation_rate = .1
                 },
                 {
                     sound = "ar_firing_far",
-                    min_hear_distance = 40,
-                    max_hear_distance = 600,
+                    min_hear_distance = 35,
+                    max_hear_distance = 400,
+                    split_audio_by_perspective = false,
                     pitch = {
                         min = .95,
                         max = 1.05
                     },
                     gain = {
-                        min = .9,
-                        max = 1
-                    }
+                        min = .25,
+                        max = .3
+                    },
+                    attenuation_rate = .03
                 }
             },
+            draw = {
+                max_hear_distance = 8,
+                sound="ar_charge",
+                gain=.8,
+                pitch=1.1
+            }
         },
         firemodes = {
             "single",
@@ -65,9 +77,6 @@ Guns4d.gun:inherit({
             offset = vector.new(0,0,.3),
             horizontal_offset = .1,
             aim_time = .3
-        },
-        textures = {
-            "m4.png"
         },
         sway = {
             max_angle = {player_axial=1, gun_axial=.15},
@@ -124,11 +133,12 @@ Guns4d.gun:inherit({
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,
             bolt_charge_mode = "catch", --"none"-chamber is always full, "catch"-when fired to dry bolt will not need to be charged after reload, "no_catch" bolt will always need to be charged after reload.
-            default_charge_time = 1,
+            draw_time = 1,
         },
     },
     consts = {
         HAS_BREATHING = true,
+        ITEM_VISUAL_OFFSET = (not Guns4d.config.realistic_items and {y=3}) --default gun has default offset for realistic mode, don't worry about it.
     }
 })
 print(Guns4d.ammo.magazine_of_gun("guns4d_pack_1:m4", true, true))

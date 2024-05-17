@@ -1,9 +1,9 @@
 minetest.register_tool("guns4d_pack_1:glock21", {
-    description = "Glock .45 ACP",
+    description = "Glock (.45 ACP)",
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "glock21_inv.png"
 })
-local glock = Guns4d.gun:inherit({
+Guns4d.gun:inherit({
     name = "guns4d_pack_1:glock21",
     itemstring = "guns4d_pack_1:glock21",
     properties = {
@@ -11,6 +11,9 @@ local glock = Guns4d.gun:inherit({
             root = "glock21",
             mesh = "glock21.b3d",
             magazine = "mag",
+            textures = {
+                "glock21.png"
+            },
             backface_culling = false,
             animations = {
                 empty = {x=0,y=0},
@@ -27,30 +30,33 @@ local glock = Guns4d.gun:inherit({
             fire = {
                 {
                     sound = "glock21_firing",
-                    max_hear_distance = 40, --far min_hear_distance is also this.
+                    max_hear_distance = 25, --far min_hear_distance is also this.
                     pitch = {
                         min = .8,
-                        max = 1.05
-                    },
-                    gain = {
-                        min = .8,
-                        max = .9
-                    }
-                },
-                {
-                    sound = "ar_firing_far",
-                    min_hear_distance = 40,
-                    max_hear_distance = 600,
-                    pitch = {
-                        min = .95,
                         max = 1.05
                     },
                     gain = {
                         min = .9,
                         max = 1
-                    }
+                    },
+                    attenuation_rate = .004
+                },
+                {
+                    sound = "ar_firing_far",
+                    min_hear_distance = 25,
+                    max_hear_distance = 250,
+                    pitch = {
+                        min = 1.1,
+                        max = 1.2
+                    },
+                    gain = {
+                        min = .35,
+                        max = .4
+                    },
+                    attenuation_rate = .04
                 }
             },
+            charge = {sound="ar_charge", delay = 0, pitch=.8, max_hear_distance=8}
         },
         firemodes = {
             "single",
@@ -65,9 +71,6 @@ local glock = Guns4d.gun:inherit({
             offset = vector.new(0,0,.25),
             horizontal_offset = .1,
             aim_time = .3
-        },
-        textures = {
-            "glock21.png"
         },
         sway = {
             max_angle = {player_axial=2, gun_axial=.35},
@@ -115,16 +118,17 @@ local glock = Guns4d.gun:inherit({
             accepted_magazines = {"guns4d_pack_1:45mm_magazine_13"} --first magazine will be default
         },
         reload = {
-            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
+            {action="charge", time=.5, anim="charge2", sounds="charge"}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
             {action="unload_mag", time=.3, anim="unload", sounds = {sound="ar_mag_unload"}},
             {action="store", time=.2, anim="store", sounds = {sound="ar_mag_store"}},
             {action="load", time=.6, anim="load", sounds = {sound="ar_mag_load", delay = .25}},
-            {action="charge", time=.6, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}
+            {action="charge", time=.6, anim="charge2", sounds="charge"}
         },
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,
             bolt_charge_mode = "catch", --"none"-chamber is always full, "catch"-when fired to dry bolt will not need to be charged after reload, "no_catch" bolt will always need to be charged after reload.
-            default_charge_time = 1,
+            draw_time = .8,
+            draw_sound = "charge"
         },
     },
     --[[custom_construct = function(self)
@@ -133,9 +137,6 @@ local glock = Guns4d.gun:inherit({
             gun_axial = vector.new(),
         }
     end,]]
-    consts = {
-        HAS_BREATHING = true,
-    }
 })
 --[[local old_update = glock.update
 glock.update = function(self, dt)

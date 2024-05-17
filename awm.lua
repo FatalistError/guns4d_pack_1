@@ -53,8 +53,12 @@ Guns4d.gun:inherit({
                 fire = {x=11, y=47},
                 unload = {x=48, y=51},
                 store = {x=51, y=67},
-                load = {x=68, y=95},
-                chamber = {x=17, y=37}
+                load = {x=68, y=100},
+                chamber = {x=17, y=37},
+                unholster = {x=105, y=135}
+            },
+            textures = {
+                "awm.png"
             },
         },
         inventory_image_magless = "awm_inv_empty.png",
@@ -68,9 +72,6 @@ Guns4d.gun:inherit({
             offset = vector.new(0,-.09,.465),
             horizontal_offset = .1,
             aim_time = .3
-        },
-        textures = {
-            "awm.png"
         },
         sway = {
             max_angle = {player_axial=1.1, gun_axial=.1},
@@ -94,19 +95,22 @@ Guns4d.gun:inherit({
                         max = 1.05
                     },
                     gain = {
-                        min = .9,
-                        max = 1
-                    }
+                        min = .3,
+                        max = .4
+                    },
+                    attenuation_rate = .1
+                    --split_audio_by_perspective = false,
                 },
                 {
                     delay = 13/24, --15 frames after start at 24 fps.
                     sound = "awm_cycling",
-                    max_hear_distance = 40, --far min_hear_distance is also this.
+                    max_hear_distance = 10, --far min_hear_distance is also this.
                     pitch = {
                         min = .95,
                         max = 1.05
                     },
-                    gain = .7
+                    gain = .7,
+                    attenuation_rate = .85
                 },
                 {
                     sound = "ar_firing_far",
@@ -119,8 +123,19 @@ Guns4d.gun:inherit({
                     gain = {
                         min = .9,
                         max = 1
-                    }
+                    },
+                    attenuation_rate = .008
                 }
+            },
+            rechamber = {
+                sound = "awm_cycling",
+                max_hear_distance = 10, --far min_hear_distance is also this.
+                pitch = {
+                    min = .95,
+                    max = 1.05
+                },
+                gain = .7,
+                attenuation_rate = .85
             },
         },
         flash_offset = vector.new(0, 0, 1.06),
@@ -158,13 +173,17 @@ Guns4d.gun:inherit({
         },
         charging = { --how the gun "cocks"
             bolt_charge_mode = "no_catch", --"none"-chamber is always full, "catch"-when fired to dry bolt will not need to be charged after reload, "no_catch" bolt will always need to be charged after reload.
+            require_charge_on_swap = true,
+            draw_time = 1,
+            draw_animation = "unholster",
+            draw_sound = "rechamber"
         },
         reload = {
-            {action="charge", time=18/24, anim="chamber", sounds = {sound="awm_cycling"}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
+            {action="charge", time=18/24, anim="chamber", sounds = "rechamber"}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
             {action="unload_mag", time=.1, anim="unload", sounds = {sound="ar_mag_unload"}},
             {action="store", time=.5, anim="store", sounds = {sound="ar_mag_store"}},
             {action="load", time=.5, anim="load", sounds = {sound="ar_mag_load"}},
-            {action="charge", time=18/24, anim="chamber", sounds={sound="awm_cycling"}}
+            {action="charge", time=18/24, anim="chamber", sounds = "rechamber"}
         },
     },
     consts = {

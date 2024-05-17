@@ -10,7 +10,7 @@ Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:556",
     range = 200,
     energy_dropoff = 4,
-    energy = 1709,
+    energy = 1700,
     sharp_penetration = 13,
     blunt_penetration = 1000,
     raw_blunt_damage = 2,
@@ -31,7 +31,7 @@ Guns4d.ammo.register_bullet({
     sharp_penetration = 20, --sharp penetration is in mmRHA. Setting this and blunt_penetration defines the ratio of how energy is distributed between the values.
     blunt_penetration = 1200, --blunt penetration is in Joules OR pascals (1 square meter). it is force or energy in MPa
     raw_blunt_damage = 5,       --the blunt damage at the blunt_penetration value. This means this is really setting the ratio of damage to blunt_penetration, meaning blocked sharp will do this amount of damage per the set blunt_penetration
-    raw_sharp_damage = 6        --the sharp damage at the sharp_penetration value. Real damage will very if the target is armoured
+    raw_sharp_damage = 7        --the sharp damage at the sharp_penetration value. Real damage will very if the target is armoured
 })
 minetest.register_craftitem("guns4d_pack_1:45A", {
     description = ".45 ACP",
@@ -42,10 +42,30 @@ minetest.register_craftitem("guns4d_pack_1:45A", {
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:45A",
     range = 200,
-    energy_dropoff = 10,
+    energy_dropoff = 7,
     energy = 900,
     sharp_penetration = 4,
     blunt_penetration = 700,
+    --pellets = 20, was for testing the system.
+    raw_blunt_damage = 2,
+    raw_sharp_damage = 2
+})
+minetest.register_craftitem("guns4d_pack_1:12G", {
+    description = ".12 ACP",
+    wield_scale = {x=.5, y=.5, z=.5},
+    stack_max = 15,
+    inventory_image = "45A.png"
+})
+Guns4d.ammo.register_bullet({
+    itemstring = "guns4d_pack_1:12G",
+    range = 200,
+    energy_dropoff = 7,
+    energy = 900,
+    sharp_penetration = 4,
+    blunt_penetration = 700,
+    pellets = 12,
+    spread_deviation = 4, --deviation of the standard distribution represented in the box muller transform.
+    spread = 6, --defaults to 1 if pellets present but spread not defined.
     raw_blunt_damage = 2,
     raw_sharp_damage = 2
 })
