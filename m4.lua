@@ -19,7 +19,7 @@ Guns4d.gun:inherit({
                 load = {x=31, y=50},
                 draw  = {x=61, y=76},
                 charge = {x=50, y=60},
-                fire = {x=49, y=85}
+                fire = {x=75, y=85}
             },
             textures = {
                 "m4.png"
