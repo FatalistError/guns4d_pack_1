@@ -19,7 +19,7 @@ Guns4d.gun:inherit({
                 load = {x=31, y=50},
                 draw  = {x=61, y=76},
                 charge = {x=50, y=60},
-                fire = {x=1, y=6}
+                fire = {x=49, y=85}
             },
             textures = {
                 "m4.png"
@@ -59,8 +59,6 @@ Guns4d.gun:inherit({
             draw = {
                 max_hear_distance = 8,
                 sound="ar_charge",
-                gain=.8,
-                pitch=1.1
             }
         },
         firemodes = {
@@ -141,4 +139,3 @@ Guns4d.gun:inherit({
         ITEM_VISUAL_OFFSET = (not Guns4d.config.realistic_items and {y=3}) --default gun has default offset for realistic mode, don't worry about it.
     }
 })
-print(Guns4d.ammo.magazine_of_gun("guns4d_pack_1:m4", true, true))

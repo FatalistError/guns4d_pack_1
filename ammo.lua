@@ -47,27 +47,27 @@ Guns4d.ammo.register_bullet({
     sharp_penetration = 4,
     blunt_penetration = 700,
     --pellets = 20, was for testing the system.
-    raw_blunt_damage = 2,
+    raw_blunt_damage = 3,
     raw_sharp_damage = 2
 })
 minetest.register_craftitem("guns4d_pack_1:12G", {
-    description = ".12 ACP",
+    description = "12 Gauge Buckshot",
     wield_scale = {x=.5, y=.5, z=.5},
     stack_max = 15,
-    inventory_image = "45A.png"
+    inventory_image = "12G.png"
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:12G",
-    range = 200,
-    energy_dropoff = 7,
-    energy = 900,
-    sharp_penetration = 4,
-    blunt_penetration = 700,
-    pellets = 12,
-    spread_deviation = 4, --deviation of the standard distribution represented in the box muller transform.
-    spread = 6, --defaults to 1 if pellets present but spread not defined.
-    raw_blunt_damage = 2,
-    raw_sharp_damage = 2
+    range = 100,
+    energy_dropoff = 5,
+    energy = 400,
+    sharp_penetration = 2,
+    blunt_penetration = 20,
+    pellets = 10,
+    spread_deviation = .6, --deviation of the standard distribution
+    spread = 4, --defaults to 1 if pellets present but spread not defined.
+    raw_blunt_damage = 1.2,
+    raw_sharp_damage = .4
 })
 --stanag
 minetest.register_tool("guns4d_pack_1:stanag", {
@@ -107,7 +107,7 @@ Guns4d.ammo.register_magazine({
 
 --glock21
 minetest.register_tool("guns4d_pack_1:45mm_magazine_13", {
-    description = "13 round glock mag (5.56x45mm)",
+    description = "13 round glock mag (.45 ACP)",
     inventory_image = "glock_mag_inv.png"
 })
 Guns4d.register_item("guns4d_pack_1:45mm_magazine_13", {

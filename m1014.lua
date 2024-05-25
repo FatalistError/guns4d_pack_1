@@ -1,7 +1,7 @@
 minetest.register_tool("guns4d_pack_1:m1014", {
     description = "m1014 (12 gauge)",
     wield_scale = {x=.5, y=.5, z=.5},
-    inventory_image = "glock21_inv.png"
+    inventory_image = "m1014_inv.png"
 })
 Guns4d.gun:inherit({
     name = "guns4d_pack_1:m1014",
@@ -9,10 +9,10 @@ Guns4d.gun:inherit({
     properties = {
         visuals = {
             root = "main",
-            mesh = "benelli_m4.b3d",
+            mesh = "m1014.b3d",
             magazine = "mag",
             textures = {
-                "benelli_m4.png"
+                "m1014.png"
             },
             backface_culling = false,
             animations = {
@@ -20,47 +20,51 @@ Guns4d.gun:inherit({
                 loaded = {x=1,y=1},
                 unload = {x=52, y=60},
                 store = {x=61, y=75},
-                load = {x=76, y=120},
-                charge2 = {x=120, y=141},
-                draw  = {x=16, y=51},
-                fire = {x=2, y=10}
+                load1 = {x=11, y=50}, --first load
+                load2 = {x=25, y=50}, --all the rest
+                charge1 = {x=51, y=75}, --charge after loading carts
+                charge2 = {x=60, y=75},
+                draw  = {x=76, y=90},
+                fire = {x=1, y=10}
             },
         },
-        sounds = {
+        sounds = { --currently is identical to the glock because I havent had time to get real sounds...
             fire = {
                 {
                     sound = "glock21_firing",
-                    max_hear_distance = 16, --far min_hear_distance is also this.
+                    max_hear_distance = 25, --far min_hear_distance is also this.
                     pitch = {
                         min = .8,
-                        max = 1.05
-                    },
-                    gain = {
-                        min = .8,
-                        max = .9
-                    }
-                },
-                {
-                    sound = "ar_firing_far",
-                    min_hear_distance = 16,
-                    max_hear_distance = 600,
-                    pitch = {
-                        min = .95,
                         max = 1.05
                     },
                     gain = {
                         min = .9,
                         max = 1
-                    }
+                    },
+                    attenuation_rate = .004
+                },
+                {
+                    sound = "ar_firing_far",
+                    min_hear_distance = 25,
+                    max_hear_distance = 250,
+                    pitch = {
+                        min = 1.1,
+                        max = 1.2
+                    },
+                    gain = {
+                        min = .35,
+                        max = .4
+                    },
+                    attenuation_rate = .04
                 }
             },
+            charge = {sound="ar_charge", delay = 0, pitch=.8, max_hear_distance=8}
         },
         firemodes = {
             "single",
         },
         crosshair = Guns4d.dynamic_crosshair,
-        inventory_image_magless = "glock21_inv_empty.png",
-        firerateRPM = 600,
+        firerateRPM = 500,
         hip = {
             offset = vector.new(-.2,.11,.65),
         },
@@ -84,20 +88,20 @@ Guns4d.gun:inherit({
         flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             velocity_correction_factor = {
-                gun_axial = .5,
+                gun_axial = .2,
                 player_axial = .1,
             },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
-                gun_axial = 6,
-                player_axial = .6,
+                gun_axial = 3.5,
+                player_axial = 4,
             },
             angular_velocity_max = {
                 gun_axial = 10,
                 player_axial = 10,
             },
             angular_velocity = {
-                gun_axial = {x=1, y=.5},
-                player_axial = {x=2, y=3},
+                gun_axial = {x=1, y=2},
+                player_axial = {x=2, y=4},
             },
             bias = {
                 gun_axial = {x=1, y=0},
@@ -115,9 +119,10 @@ Guns4d.gun:inherit({
             accepted_bullets = {"guns4d_pack_1:12G"}, --first bullet default
         },
         reload = {
-            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.
-            {action="load_cartridge", time=.6, anim="load", sounds = {sound="ar_mag_load", delay = .25}},
-            {action="charge", time=.6, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}}
+            {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}},
+            {action="load_cartridge_once", time=1.05, anim="load1", sounds = {sound="ar_mag_load", delay = .65}},
+            {action="load_cartridge", time=.75, anim="load2", sounds = {sound="ar_mag_load", delay = .25}},
+            {action="charge", time=.6, anim="charge1", sounds={sound="ar_charge", delay = 0, pitch=.8}}
         },
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,
