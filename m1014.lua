@@ -128,6 +128,7 @@ Guns4d.gun:inherit({
             require_charge_on_swap = true,
             bolt_charge_mode = "no_catch", --"none"-chamber is always full, "catch"-when fired to dry bolt will not need to be charged after reload, "no_catch" bolt will always need to be charged after reload.
             draw_time = 1,
+            draw_sound = "charge",
         },
     },
     --[[custom_construct = function(self)
