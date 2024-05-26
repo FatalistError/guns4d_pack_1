@@ -139,5 +139,6 @@ Guns4d.gun:inherit({
     end,]]
     consts = {
         HAS_BREATHING = true,
+        DEFAULT_FPS = 40,
     }
 })
