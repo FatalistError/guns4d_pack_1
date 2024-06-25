@@ -141,20 +141,16 @@ Guns4d.gun:inherit({
         flash_offset = vector.new(0, 0, 1.06),
         recoil = {
             velocity_correction_factor = { --I dont remember what this actually does
-                gun_axial = 1,
-                player_axial = 1,
+                gun_axial = 4,
+                player_axial = 3,
             },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
                 gun_axial = 5,
-                player_axial = 1,
-            },
-            angular_velocity_max = { --not an auto weapon, so it doesnt matter
-                gun_axial = 1000,
-                player_axial = 1000,
+                player_axial = 3,
             },
             angular_velocity = {
-                gun_axial = {x=4, y=1},
-                player_axial = {x=3.5, y=4},
+                gun_axial = {x=.7, y=.55},
+                player_axial = {x=2.5, y=2.5},
             },
             bias = {
                 gun_axial = {x=1, y=0},
@@ -165,7 +161,9 @@ Guns4d.gun:inherit({
                 player_axial = 5,
             },
         },
-        walking_offset = {gun_axial={x=.5,y=-.5}, player_axial={x=1,y=1}},
+        wag = {
+            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+        },
         ammo = {
             magazine_only = true,
             accepted_bullets = {"guns4d_pack_1:338L"},

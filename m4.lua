@@ -90,21 +90,21 @@ Guns4d.gun:inherit({
         },
         flash_offset = vector.new(0, -.10787, .878),
         recoil = {
-            velocity_correction_factor = {
-                gun_axial = 1,
-                player_axial = 1,
+            velocity_correction_factor = { --velocity correction factor is currently very broken.
+                gun_axial = 2,
+                player_axial = 1.5,
             },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
                 gun_axial = 5,
                 player_axial = 10,
             },
             angular_velocity_max = {
-                gun_axial = 2,
-                player_axial = 2,
+                gun_axial = .4,
+                player_axial = 1,
             },
             angular_velocity = {
-                gun_axial = {x=.4, y=.4},
-                player_axial = {x=.5, y=.5},
+                gun_axial = {x=.15, y=.17},
+                player_axial = {x=.25, y=.25},
             },
             bias = {
                 gun_axial = {x=1, y=0},
@@ -115,11 +115,14 @@ Guns4d.gun:inherit({
                 player_axial = 100,
             },
         },
-        walking_offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+        wag = {
+            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+        },
         ammo = {
             magazine_only = true,
             accepted_bullets = {"guns4d_pack_1:556"},
-            accepted_magazines = {"guns4d_pack_1:stanag"}
+            accepted_magazines = {"guns4d_pack_1:stanag"},
+            initial_mag = "guns4d_pack_1:stanag"
         },
         reload = {
             {action="charge", time=.5, anim="charge", sounds={sound="ar_charge", delay = .2}}, --this way if you accidentally cancel you can still cock it and your gun isnt softlocked.

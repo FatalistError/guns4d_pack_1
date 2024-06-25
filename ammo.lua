@@ -13,8 +13,8 @@ Guns4d.ammo.register_bullet({
     energy = 1700,
     sharp_penetration = 13,
     blunt_penetration = 1000,
-    raw_blunt_damage = 2,
-    raw_sharp_damage = 5
+    raw_blunt_damage = 3,
+    raw_sharp_damage = 4
 })
 --338 lupua
 minetest.register_craftitem("guns4d_pack_1:338L", {
@@ -28,8 +28,8 @@ Guns4d.ammo.register_bullet({
     range = 350,
     energy_dropoff = 3,      --the dropoff of energy per meter. This will cause penetration dropoff for both blunt and sharp.
     energy = 2000,          --energy in joules, this is used for blunt->calculation based on blunt_penetration value. The higher this is, the more blunt_force will be generated from "blocked" sharp_penetration. 1j = 1MPa
-    sharp_penetration = 20, --sharp penetration is in mmRHA. Setting this and blunt_penetration defines the ratio of how energy is distributed between the values.
-    blunt_penetration = 1200, --blunt penetration is in Joules OR pascals (1 square meter). it is force or energy in MPa
+    sharp_penetration = 20, --sharp penetration is in mmRHA.
+    blunt_penetration = 1200, --blunt penetration is in Joules OR pascals (1 square meter). it is force or energy in MPa, this defines the ratio of energy which goes to blunt penetration aswell.
     raw_blunt_damage = 5,       --the blunt damage at the blunt_penetration value. This means this is really setting the ratio of damage to blunt_penetration, meaning blocked sharp will do this amount of damage per the set blunt_penetration
     raw_sharp_damage = 7        --the sharp damage at the sharp_penetration value. Real damage will very if the target is armoured
 })
@@ -58,14 +58,14 @@ minetest.register_craftitem("guns4d_pack_1:12G", {
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:12G",
-    range = 100,
+    range = 80,
     energy_dropoff = 5,
     energy = 400,
     sharp_penetration = 2,
     blunt_penetration = 20,
-    pellets = 10,
+    pellets = 8,
     spread_deviation = .6, --deviation of the standard distribution
-    spread = 4, --defaults to 1 if pellets present but spread not defined.
+    spread = 3, --defaults to 1 if pellets present but spread not defined.
     raw_blunt_damage = 1.2,
     raw_sharp_damage = .4
 })

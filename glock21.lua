@@ -86,10 +86,6 @@ Guns4d.gun:inherit({
         },
         flash_offset = vector.new(0, -.10787, .878),
         recoil = {
-            velocity_correction_factor = {
-                gun_axial = 1,
-                player_axial = 1,
-            },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
                 gun_axial = 5,
                 player_axial = 10,
@@ -99,19 +95,21 @@ Guns4d.gun:inherit({
                 player_axial = 2,
             },
             angular_velocity = {
-                gun_axial = {x=.7, y=.8},
-                player_axial = {x=.8, y=.8},
+                gun_axial = {x=.2, y=.3},
+                player_axial = {x=.3, y=.3},
             },
             bias = {
-                gun_axial = {x=.15, y=0},
-                player_axial = {x=.6, y=0},
+                gun_axial = {x=.6, y=0},
+                player_axial = {x=-.6, y=0},
             },
             target_correction_max_rate = { --the cap for time_since_fire*target_correction_factor
                 gun_axial = 40,
                 player_axial = 40,
             },
         },
-        walking_offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+        wag = {
+            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+        },
         ammo = {
             magazine_only = true,
             accepted_bullets = {"guns4d_pack_1:45A"}, --first bullet default
