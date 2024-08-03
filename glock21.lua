@@ -25,6 +25,11 @@ Guns4d.gun:inherit({
                 draw  = {x=16, y=51},
                 fire = {x=1, y=14}
             },
+            --multi_jointed_player support
+            multi_jointed_player = {
+                player_rotation_offset = 0,
+                chest_offset = 15
+            }
         },
         sounds = {
             fire = {
@@ -65,12 +70,12 @@ Guns4d.gun:inherit({
         inventory_image_magless = "glock21_inv_empty.png",
         firerateRPM = 1000,
         hip = {
-            offset = vector.new(-.22,.1,.3),
+            offset = vector.new(-.22,.1,.5),
         },
         ads = {
-            offset = vector.new(0,0,.25),
+            offset = vector.new(0,0,.35),
             horizontal_offset = .1,
-            aim_time = .3
+            aim_time = .5
         },
         sway = {
             max_angle = {player_axial=2, gun_axial=.35},

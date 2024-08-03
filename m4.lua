@@ -24,6 +24,11 @@ Guns4d.gun:inherit({
             textures = {
                 "m4.png"
             },
+            multi_jointed_player = {
+                player_rotation_offset = 12,
+                chest_offset = 35,
+                leftward_strafe_limit = 60,
+            }
         },
         sounds = {
             fire = {
@@ -74,7 +79,7 @@ Guns4d.gun:inherit({
         ads = {
             offset = vector.new(0,0,.3),
             horizontal_offset = .1,
-            aim_time = .3
+            aim_time = .6
         },
         sway = {
             max_angle = {player_axial=1, gun_axial=.15},
@@ -92,7 +97,7 @@ Guns4d.gun:inherit({
         recoil = {
             velocity_correction_factor = { --velocity correction factor is currently very broken.
                 gun_axial = 2,
-                player_axial = 1.5,
+                player_axial = 1.75,
             },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
                 gun_axial = 5,
@@ -103,7 +108,7 @@ Guns4d.gun:inherit({
                 player_axial = 1,
             },
             angular_velocity = {
-                gun_axial = {x=.15, y=.17},
+                gun_axial = {x=.075, y=.17},
                 player_axial = {x=.25, y=.25},
             },
             bias = {
