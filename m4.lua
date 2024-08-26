@@ -3,11 +3,43 @@ minetest.register_tool("guns4d_pack_1:m4", {
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "m4_inv.png"
 })
+Guns4d.attachment_handler.register_attachment({
+    itemstring = "default:steel_ingot"
+})
 Guns4d.gun:inherit({
     name = "guns4d_pack_1:m4",
     itemstring = "guns4d_pack_1:m4",
     properties = {
+        inventory = {
+            render_size = 2,
+            render_image = "m4_ortho.png",
+            attachment_slots = {
+                --[[underbarrel = {
+                    formspec_offset = {x=2, y=0},
+                    slots = 1,
+                    rail = "picatinny", --only attachments fit for this type will be usable.
+                    allowed = {
+                        "guns4d_pack_1:carry_handle_and_irons"
+                    },
+                }]]
+                reciever = {
+                    description = "reciever mount",
+                    formspec_offset = {x=-1.5, y=2.5},
+                    slots = 1,
+                    allowed = {
+                        "guns4d_pack_1:carry_handle_and_irons",
+                        "default:steel_ingot"
+                    }
+                },
+                heatshield = {
+                    description = "heatshield",
+                    slots = 1,
+                    formspec_offset = {x=1.8, y=1.35},
+                }
+            }
+        },
         visuals = {
+            scale = 1.5,
             backface_culling = false,
             root = "m4",
             mesh = "m4.b3d",
@@ -30,6 +62,10 @@ Guns4d.gun:inherit({
                 leftward_strafe_limit = 60,
             }
         },
+        --[[item = {
+            collisionbox = ((not Guns4d.config.realistic_items) and {-.1,-.4,-.1,   .1,.05,.1}) or {-.1,-.05,-.1,   .1,.15,.1},
+            selectionbox = {-.1,-.1,-.1,   .1,.1,.1}
+        },]]
         sounds = {
             fire = {
                 {
@@ -144,6 +180,5 @@ Guns4d.gun:inherit({
     },
     consts = {
         HAS_BREATHING = true,
-        ITEM_VISUAL_OFFSET = (not Guns4d.config.realistic_items and {y=3}) --default gun has default offset for realistic mode, don't worry about it.
     }
 })

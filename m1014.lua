@@ -7,7 +7,12 @@ Guns4d.gun:inherit({
     name = "guns4d_pack_1:m1014",
     itemstring = "guns4d_pack_1:m1014",
     properties = {
+        inventory = {
+            render_image = "m1014_ortho.png",
+            render_size = 2,
+        },
         visuals = {
+            scale = 1.5,
             root = "main",
             mesh = "m1014.b3d",
             magazine = "mag",

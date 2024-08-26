@@ -8,6 +8,7 @@ Guns4d.gun:inherit({
     itemstring = "guns4d_pack_1:glock21",
     properties = {
         visuals = {
+            scale = 1.5,
             root = "glock21",
             mesh = "glock21.b3d",
             magazine = "mag",

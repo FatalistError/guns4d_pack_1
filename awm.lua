@@ -45,6 +45,7 @@ Guns4d.gun:inherit({
     itemstring = "guns4d_pack_1:awm",
     properties = {
         visuals = {
+            scale = 1.5,
             backface_culling = false,
             mesh = "awm.b3d",
             animations = {
