@@ -13,7 +13,6 @@ Guns4d.gun:inherit({
         },
         visuals = {
             scale = 1.5,
-            root = "main",
             mesh = "m1014.b3d",
             magazine = "mag",
             textures = {
@@ -147,5 +146,6 @@ Guns4d.gun:inherit({
     consts = {
         HAS_BREATHING = true,
         DEFAULT_FPS = 40,
+        ROOT_BONE = "main"
     }
 })

@@ -22,7 +22,7 @@ Guns4d.gun:inherit({
                         "guns4d_pack_1:carry_handle_and_irons"
                     },
                 }]]
-                reciever = {
+                --[[reciever = {
                     description = "reciever mount",
                     formspec_offset = {x=-1.5, y=2.5},
                     slots = 1,
@@ -35,13 +35,12 @@ Guns4d.gun:inherit({
                     description = "heatshield",
                     slots = 1,
                     formspec_offset = {x=1.8, y=1.35},
-                }
+                }]]
             }
         },
         visuals = {
             scale = 1.5,
             backface_culling = false,
-            root = "m4",
             mesh = "m4.b3d",
             animations = {
                 empty = {x=0,y=0},
@@ -180,5 +179,6 @@ Guns4d.gun:inherit({
     },
     consts = {
         HAS_BREATHING = true,
+        ROOT_BONE = "m4"
     }
 })

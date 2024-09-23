@@ -9,7 +9,6 @@ Guns4d.gun:inherit({
     properties = {
         visuals = {
             scale = 1.5,
-            root = "glock21",
             mesh = "glock21.b3d",
             magazine = "mag",
             textures = {
@@ -135,6 +134,9 @@ Guns4d.gun:inherit({
             draw_sound = "charge"
         },
     },
+    consts = {
+        ROOT_BONE = "glock21"
+    }
     --[[custom_construct = function(self)
         self.offsets.screen_offset = {
             player_axial = vector.new(),

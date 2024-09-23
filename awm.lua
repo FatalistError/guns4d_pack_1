@@ -150,8 +150,10 @@ Guns4d.gun:inherit({
                 player_axial = 3,
             },
             angular_velocity = {
+                --gun_axial = {x=.7, y=.55},
+                --player_axial = {x=2.5, y=2.5},
                 gun_axial = {x=.7, y=.55},
-                player_axial = {x=2.5, y=2.5},
+                player_axial = {x=2, y=2.5},
             },
             bias = {
                 gun_axial = {x=1, y=0},
