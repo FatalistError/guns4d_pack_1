@@ -66,7 +66,9 @@ Guns4d.gun:inherit({
                 "awm.png"
             },
         },
-        inventory_image_magless = "awm_inv_empty.png",
+        inventory = {
+            inventory_image_magless = "awm_inv_empty.png",
+        },
         subclasses = {
             crosshair = Guns4d.dynamic_crosshair,
             sprite_scope = awm_scope,
@@ -197,5 +199,6 @@ Guns4d.gun:inherit({
     consts = {
         DEFAULT_FPS = 24,
         ANIMATIONS_OFFSET_AIM = true,
+        VERSION = {1, 3, 2}
     }
 })

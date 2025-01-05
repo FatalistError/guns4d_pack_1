@@ -31,6 +31,9 @@ Guns4d.gun:inherit({
                 chest_offset = 8
             }
         },
+        inventory = {
+            inventory_image_magless = "glock21_inv_empty.png",
+        },
         sounds = {
             fire = {
                 {
@@ -66,8 +69,6 @@ Guns4d.gun:inherit({
         firemodes = {
             "single",
         },
-        crosshair = Guns4d.dynamic_crosshair,
-        inventory_image_magless = "glock21_inv_empty.png",
         firerateRPM = 1000,
         hip = {
             offset = vector.new(-.22,.15,.43),
@@ -78,8 +79,8 @@ Guns4d.gun:inherit({
             aim_time = .5
         },
         sway = {
-            max_angle = {player_axial=6, gun_axial=.35},
-            angular_velocity = {player_axial=.6, gun_axial=.6},
+            max_angle = {player_axial=2, gun_axial=.5},
+            angular_velocity = {player_axial=.3, gun_axial=.9},
             hipfire_velocity_multiplier = { --same as above but for velocity.
                 gun_axial = 2,
                 player_axial = 2
@@ -135,7 +136,8 @@ Guns4d.gun:inherit({
         },
     },
     consts = {
-        ROOT_BONE = "glock21"
+        ROOT_BONE = "glock21",
+        VERSION = {1,3,2}
     }
     --[[custom_construct = function(self)
         self.offsets.screen_offset = {

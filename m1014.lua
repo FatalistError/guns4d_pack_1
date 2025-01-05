@@ -67,7 +67,6 @@ Guns4d.gun:inherit({
         firemodes = {
             "single",
         },
-        crosshair = Guns4d.dynamic_crosshair,
         firerateRPM = 500,
         hip = {
             offset = vector.new(-.2,.11,.65),
@@ -146,6 +145,7 @@ Guns4d.gun:inherit({
     consts = {
         HAS_BREATHING = true,
         DEFAULT_FPS = 40,
-        ROOT_BONE = "main"
+        ROOT_BONE = "main",
+        VERSION = {1,3,2}
     }
 })

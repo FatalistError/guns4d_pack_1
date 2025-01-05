@@ -26,13 +26,14 @@ Guns4d.part_handler.register_attachment({
         }
         props.subclasses["reflector_551"] = Guns4d.Reflector_sight:inherit({
             --gun = gun,
+            name = "guns4d:reflector_551",
             offset = props.ads.offset.z+.012,
             scale = .15,
             texture = "holo.png",
             deviation_tolerance = {
-                width = .028*props.visuals.scale,
-                height = .195*props.visuals.scale,
-                deadzone = .004
+                width = .02812*props.visuals.scale*1.2,
+                height = .01953*props.visuals.scale*1.2,
+                deadzone = .006
             },
         })
         local ga = props.recoil.angular_velocity.gun_axial
@@ -170,8 +171,8 @@ Guns4d.gun:inherit({
             aim_time = .6
         },
         sway = {
-            max_angle = {player_axial=1, gun_axial=.15},
-            angular_velocity = {player_axial=.1, gun_axial=.1},
+            max_angle = {player_axial=1, gun_axial=.25},
+            angular_velocity = {player_axial=.1, gun_axial=.2},
             hipfire_velocity_multiplier = { --same as above but for velocity.
                 gun_axial = 4,
                 player_axial = 6
