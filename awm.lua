@@ -1,42 +1,46 @@
-local scope_scale = 5
+local forescope_scale = 5
+local backscope_scale = 2
 local awm_scope = Guns4d.sprite_scope:inherit({
     images = {
         reticle = {
             texture = "awm_reticle.png",
-            scale = {x=scope_scale,y=scope_scale},
+            scale = {x=forescope_scale,y=forescope_scale},
             movement_multiplier = 1,
             misalignment_opacity_threshold_angle = 3,
             misalignment_opacity_maximum_angle = 8,
         },
         fore = {
             texture = "awm_forescope.png",
-            scale = {x=(151/32)*scope_scale,y=(151/32)*scope_scale}, --16x16 image, needs to be the same visible size as the reticle (which is 251x)
-            movement_multiplier = 1,
+            --projection_pos = {x=0,y=0,z=.1465*1.5}, --projection location relative to the gun.
+            scale = {x=(151/32)*forescope_scale,y=(151/32)*forescope_scale}, --16x16 image, needs to be the same visible size as the reticle (which is 251x)
+            projection_pos = {x=0,y=0,z=.1465*1.5}, --projection location relative to the gun.
         },
-        --[[back = {
-            texture = "awm_backscope.png",
-            scale = {x=(151/32)*scope_scale,y=(151/32)*scope_scale},
-            movement_multiplier = -1,
-            opacity_delay = 2,
-            paxial = true,
-        },]]
         border_fore = {
             texture = "awm_scope_border.png",
-            scale = {x=151*scope_scale,y=151*scope_scale}, --7x7 image, needs to be 7 times the size of the reticle/forescope
-            movement_multiplier = 1,
+            --projection_pos = {x=0,y=0,z=.1465*1.5}, --projection location relative to the gun.
+            scale = {x=151*forescope_scale,y=151*forescope_scale}, --7x7 image, needs to be 7 times the size of the reticle/forescope
+            --projection_pos = {x=0,y=0,z=-.135*1.5}, --projection location relative to the gun.
+        },
+
+        back = {
+            texture = "awm_backscope.png",
+            scale = {x=(152/32)*backscope_scale,y=(152/32)*backscope_scale},
+            projection_pos = {x=0,y=0,z=-.135*1.5}, --projection location relative to the gun.
+            opacity_delay = .01,
+            paxial = true,
         },
         border_back = {
             texture = "awm_scope_border.png",
-            scale = {x=151*scope_scale*1.2,y=151*scope_scale*1.2},
-            movement_multiplier = -1,
-            opacity_delay = 2,
-            paxial = true,
+            scale = {x=151*backscope_scale,y=151*backscope_scale},
+            projection_pos = {x=0,y=0,z=-.135*1.5}, --projection location relative to the gun.
+            opacity_delay = .01,
         }
         --mask = "blank.png",
     },
+    --hide_gun=false
 })
 minetest.register_tool("guns4d_pack_1:awm", {
-    description = "AWM sniper rifle (5.56x45mm)",
+    description = "AWM sniper rifle (338 Lupua)",
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "awm_inv.png"
 })
@@ -63,8 +67,10 @@ Guns4d.gun:inherit({
             },
         },
         inventory_image_magless = "awm_inv_empty.png",
-        crosshair = Guns4d.dynamic_crosshair,
-        sprite_scope = awm_scope,
+        subclasses = {
+            crosshair = Guns4d.dynamic_crosshair,
+            sprite_scope = awm_scope,
+        },
         firerateRPM = 60/1.1,
         hip = {
             offset = vector.new(-.22,.1,.4),
@@ -75,7 +81,7 @@ Guns4d.gun:inherit({
             aim_time = .3
         },
         sway = {
-            max_angle = {player_axial=1.1, gun_axial=.1},
+            max_angle = {player_axial=1.1, gun_axial=.4},
             angular_velocity = {player_axial=.1, gun_axial=.1},
             hipfire_velocity_multiplier = { --same as above but for velocity.
                 gun_axial = 4,
@@ -88,6 +94,20 @@ Guns4d.gun:inherit({
         },
         sounds = {
             fire = {
+                {
+                    sound = "ar_firing_far",
+                    min_hear_distance = 0,
+                    max_hear_distance = 600,
+                    pitch = {
+                        min = .95,
+                        max = 1.05
+                    },
+                    gain = {
+                        min = .9,
+                        max = 1
+                    },
+                    attenuation_rate = .008
+                },
                 {
                     sound = "awm_firing",
                     max_hear_distance = 40, --far min_hear_distance is also this.
@@ -113,20 +133,7 @@ Guns4d.gun:inherit({
                     gain = .7,
                     attenuation_rate = .85
                 },
-                {
-                    sound = "ar_firing_far",
-                    min_hear_distance = 40,
-                    max_hear_distance = 600,
-                    pitch = {
-                        min = .95,
-                        max = 1.05
-                    },
-                    gain = {
-                        min = .9,
-                        max = 1
-                    },
-                    attenuation_rate = .008
-                }
+
             },
             rechamber = {
                 sound = "awm_cycling",
@@ -165,7 +172,7 @@ Guns4d.gun:inherit({
             },
         },
         wag = {
-            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+            offset = {gun_axial={x=2.3,y=2.8}, player_axial={x=2,y=2}},
         },
         ammo = {
             magazine_only = true,
@@ -188,7 +195,6 @@ Guns4d.gun:inherit({
         },
     },
     consts = {
-        KEYFRAME_SAMPLE_PRECISION = 1, -- has to be more precise for the bolt cycle animation
         DEFAULT_FPS = 24,
         ANIMATIONS_OFFSET_AIM = true,
     }

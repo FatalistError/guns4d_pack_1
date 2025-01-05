@@ -21,14 +21,14 @@ Guns4d.gun:inherit({
                 unload = {x=52, y=60},
                 store = {x=61, y=75},
                 load = {x=76, y=120},
-                charge2 = {x=120, y=141},
+                charge2 = {x=120, y=140},
                 draw  = {x=16, y=51},
                 fire = {x=1, y=14}
             },
             --multi_jointed_player support
             multi_jointed_player = {
                 player_rotation_offset = 0,
-                chest_offset = 15
+                chest_offset = 8
             }
         },
         sounds = {
@@ -70,15 +70,15 @@ Guns4d.gun:inherit({
         inventory_image_magless = "glock21_inv_empty.png",
         firerateRPM = 1000,
         hip = {
-            offset = vector.new(-.22,.1,.5),
+            offset = vector.new(-.22,.15,.43),
         },
         ads = {
-            offset = vector.new(0,0,.35),
-            horizontal_offset = .1,
+            offset = vector.new(0,0,.46),
+            horizontal_offset = .08,
             aim_time = .5
         },
         sway = {
-            max_angle = {player_axial=2, gun_axial=.35},
+            max_angle = {player_axial=6, gun_axial=.35},
             angular_velocity = {player_axial=.6, gun_axial=.6},
             hipfire_velocity_multiplier = { --same as above but for velocity.
                 gun_axial = 2,
@@ -92,20 +92,20 @@ Guns4d.gun:inherit({
         flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
-                gun_axial = 5,
-                player_axial = 10,
+                gun_axial = 15,
+                player_axial = 5,
             },
             angular_velocity_max = {
-                gun_axial = 2,
-                player_axial = 2,
+                gun_axial = .5,
+                player_axial = .5,
             },
             angular_velocity = {
-                gun_axial = {x=.2, y=.3},
-                player_axial = {x=.3, y=.3},
+                gun_axial = {x=.2, y=.15},
+                player_axial = {x=.2, y=.2},
             },
             bias = {
                 gun_axial = {x=.6, y=0},
-                player_axial = {x=-.6, y=0},
+                player_axial = {x=-.1, y=0},
             },
             target_correction_max_rate = { --the cap for time_since_fire*target_correction_factor
                 gun_axial = 40,
@@ -113,7 +113,7 @@ Guns4d.gun:inherit({
             },
         },
         wag = {
-            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+            offset = {gun_axial={x=.5,y=-.5}, player_axial={x=3,y=3}},
         },
         ammo = {
             magazine_only = true,

@@ -24,9 +24,9 @@ Guns4d.gun:inherit({
                 loaded = {x=1,y=1},
                 unload = {x=52, y=60},
                 store = {x=61, y=75},
-                load1 = {x=11, y=50}, --first load
-                load2 = {x=25, y=50}, --all the rest
-                charge1 = {x=51, y=75}, --charge after loading carts
+                load1 = {x=11, y=45}, --first load
+                load2 = {x=25, y=45}, --all the rest
+                charge1 = {x=45, y=74}, --charge after loading carts
                 charge2 = {x=60, y=75},
                 draw  = {x=76, y=90},
                 fire = {x=1, y=10}
@@ -75,7 +75,7 @@ Guns4d.gun:inherit({
         ads = {
             offset = vector.new(0,0,.511),
             horizontal_offset = .1,
-            aim_time = .3
+            aim_time = .5
         },
         sway = {
             max_angle = {player_axial=4, gun_axial=.25},
@@ -93,26 +93,26 @@ Guns4d.gun:inherit({
         recoil = {
             velocity_correction_factor = {
                 gun_axial = 2,
-                player_axial = 3,
+                player_axial = 6,
             },
             angular_velocity_max = {
                 gun_axial = 2,
-                player_axial = 2,
+                player_axial = 8,
             },
             angular_velocity = {
                 gun_axial = {x=.3, y=.55},
-                player_axial = {x=1.1, y=3.3},
+                player_axial = {x=1.75, y=4},
             },
             bias = {
                 gun_axial = {x=-.1, y=0},
-                player_axial = {x=1, y=0},
+                player_axial = {x=.5, y=0},
             },
             target_correction_max_rate = {
                 gun_axial = 12,
-                player_axial = 6,
+                player_axial = 12,
             },
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
-                gun_axial = 5,
+                gun_axial = 2,
                 player_axial = 10,
             },
         },
@@ -128,7 +128,7 @@ Guns4d.gun:inherit({
             {action="charge", time=.5, anim="charge2", sounds={sound="ar_charge", delay = 0, pitch=.8}},
             {action="load_cartridge_once", time=1.05, anim="load1", sounds = {sound="ar_mag_load", delay = .65}},
             {action="load_cartridge", time=.75, anim="load2", sounds = {sound="ar_mag_load", delay = .25}},
-            {action="charge", time=.6, anim="charge1", sounds={sound="ar_charge", delay = 0, pitch=.8}}
+            {action="charge", time=.8, anim="charge1", sounds={sound="ar_charge", delay = 0, pitch=.8}}
         },
         charging = { --how the gun "cocks"
             require_charge_on_swap = true,

@@ -3,8 +3,46 @@ minetest.register_tool("guns4d_pack_1:m4", {
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "m4_inv.png"
 })
-Guns4d.attachment_handler.register_attachment({
-    itemstring = "default:steel_ingot"
+Guns4d.part_handler.register_attachment({
+    itemstring = "default:steel_ingot",
+    textures = {"m4.png"},
+    mod = function(gun)
+        local props = gun.properties
+        --props.visuals.textures[1] = "blank.png"
+        --[[props.recoil.angular_velocity = {
+            gun_axial = {x=0,y=0},
+            player_axial = {x=0,y=0}
+        }]]
+        props.visuals.attached_objects.carry_handle = nil
+        props.ads.offset = {x=0,y=.0035,z=.3}
+        props.visuals.attached_objects.holographic_551 = {
+            mesh = "holographic.obj",
+            textures = {
+                "holographic.png"
+            },
+            rotation = {x=0,y=180,z=0},
+            offset = {x=0,y=.012,z=.03},
+            scale = 1.2
+        }
+        props.subclasses["reflector_551"] = Guns4d.Reflector_sight:inherit({
+            --gun = gun,
+            offset = props.ads.offset.z+.012,
+            scale = .15,
+            texture = "holo.png",
+            deviation_tolerance = {
+                width = .028*props.visuals.scale,
+                height = .195*props.visuals.scale,
+                deadzone = .004
+            },
+        })
+        local ga = props.recoil.angular_velocity.gun_axial
+        local pa = props.recoil.angular_velocity.player_axial
+        local x,y = ga.x, ga.y
+        ga.x = x*.4
+        ga.y = y*.4
+        pa.x = pa.x + x*2
+        pa.y = pa.y + y*1.5
+    end
 })
 Guns4d.gun:inherit({
     name = "guns4d_pack_1:m4",
@@ -13,16 +51,17 @@ Guns4d.gun:inherit({
         inventory = {
             render_size = 2,
             render_image = "m4_ortho.png",
-            attachment_slots = {
-                --[[underbarrel = {
+            part_slots = {
+                underbarrel = {
                     formspec_offset = {x=2, y=0},
                     slots = 1,
                     rail = "picatinny", --only attachments fit for this type will be usable.
                     allowed = {
-                        "guns4d_pack_1:carry_handle_and_irons"
+                        "guns4d_pack_1:carry_handle_and_irons",
+                        "default:steel_ingot"
                     },
-                }]]
-                --[[reciever = {
+                },
+                reciever = {
                     description = "reciever mount",
                     formspec_offset = {x=-1.5, y=2.5},
                     slots = 1,
@@ -35,8 +74,9 @@ Guns4d.gun:inherit({
                     description = "heatshield",
                     slots = 1,
                     formspec_offset = {x=1.8, y=1.35},
-                }]]
-            }
+                }
+            },
+            inventory_image_magless = "m4_inv_empty.png",
         },
         visuals = {
             scale = 1.5,
@@ -59,7 +99,21 @@ Guns4d.gun:inherit({
                 player_rotation_offset = 12,
                 chest_offset = 35,
                 leftward_strafe_limit = 60,
+                roll_arm_right = 25,
+                roll_arm_left = 0,
+            },
+            attached_objects = {
+                carry_handle = {
+                    mesh = "m4_carry_handle.obj",
+                    textures = {
+                        "m4.png"
+                    },
+                    rotation = {x=0,y=180,z=0}
+                },
             }
+        },
+        subclasses = {
+            crosshair = Guns4d.dynamic_crosshair,
         },
         --[[item = {
             collisionbox = ((not Guns4d.config.realistic_items) and {-.1,-.4,-.1,   .1,.05,.1}) or {-.1,-.05,-.1,   .1,.15,.1},
@@ -104,10 +158,9 @@ Guns4d.gun:inherit({
         firemodes = {
             "single",
             "burst",
+            "auto"
         },
-        crosshair = Guns4d.dynamic_crosshair,
-        inventory_image_magless = "m4_inv_empty.png",
-        firerateRPM = 1000,
+        firerateRPM = 850,
         hip = {
             offset = vector.new(-.22,.1,.3),
         },
@@ -139,11 +192,11 @@ Guns4d.gun:inherit({
                 player_axial = 10,
             },
             angular_velocity_max = {
-                gun_axial = .4,
+                gun_axial = .2,
                 player_axial = 1,
             },
             angular_velocity = {
-                gun_axial = {x=.075, y=.17},
+                gun_axial = {x=.045, y=.11},
                 player_axial = {x=.25, y=.25},
             },
             bias = {
@@ -156,7 +209,7 @@ Guns4d.gun:inherit({
             },
         },
         wag = {
-            offset = {gun_axial={x=.1,y=-.3}, player_axial={x=1,y=1}},
+            offset = {gun_axial={x=.3,y=-.8}, player_axial={x=4,y=4}},
         },
         ammo = {
             magazine_only = true,
@@ -179,6 +232,7 @@ Guns4d.gun:inherit({
     },
     consts = {
         HAS_BREATHING = true,
-        ROOT_BONE = "m4"
+        ROOT_BONE = "m4",
+        VERSION = {1, 3, 0}
     }
 })
