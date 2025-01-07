@@ -3,7 +3,7 @@ minetest.register_tool("guns4d_pack_1:m4", {
     wield_scale = {x=.5, y=.5, z=.5},
     inventory_image = "m4_inv.png"
 })
-Guns4d.part_handler.register_attachment({
+--[[Guns4d.part_handler.register_attachment({
     itemstring = "default:steel_ingot",
     textures = {"m4.png"},
     mod = function(gun)
@@ -12,7 +12,7 @@ Guns4d.part_handler.register_attachment({
         --[[props.recoil.angular_velocity = {
             gun_axial = {x=0,y=0},
             player_axial = {x=0,y=0}
-        }]]
+        }
         props.visuals.attached_objects.carry_handle = nil
         props.ads.offset = {x=0,y=.0035,z=.3}
         props.visuals.attached_objects.holographic_551 = {
@@ -44,7 +44,7 @@ Guns4d.part_handler.register_attachment({
         pa.x = pa.x + x*2
         pa.y = pa.y + y*1.5
     end
-})
+})]]
 Guns4d.gun:inherit({
     name = "guns4d_pack_1:m4",
     itemstring = "guns4d_pack_1:m4",
