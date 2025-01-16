@@ -8,6 +8,7 @@ Guns4d.gun:inherit({
     itemstring = "guns4d_pack_1:glock21",
     properties = {
         visuals = {
+            flash_offset = vector.new(0, -.01, 0),
             scale = 1.5,
             mesh = "glock21.b3d",
             magazine = "mag",
@@ -71,10 +72,10 @@ Guns4d.gun:inherit({
         },
         firerateRPM = 1000,
         hip = {
-            offset = vector.new(-.22,.15,.43),
+            offset = vector.new(-.22,.15,.3),
         },
         ads = {
-            offset = vector.new(0,0,.46),
+            offset = vector.new(0,0,.3),
             horizontal_offset = .08,
             aim_time = .5
         },
@@ -90,7 +91,6 @@ Guns4d.gun:inherit({
                 player_axial = 1
             }
         },
-        flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             target_correction_factor = { --angular correction rate per second: time_since_fire*target_correction_factor
                 gun_axial = 15,

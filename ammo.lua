@@ -8,7 +8,7 @@ minetest.register_craftitem("guns4d_pack_1:556", {
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:556",
-    range = 200,
+    range = 450,
     energy_dropoff = 4,
     energy = 1700,
     sharp_penetration = 13,
@@ -25,7 +25,7 @@ minetest.register_craftitem("guns4d_pack_1:338L", {
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:338L",
-    range = 350,
+    range = 700,
     energy_dropoff = 3,      --the dropoff of energy per meter. This will cause penetration dropoff for both blunt and sharp.
     energy = 2000,          --energy in joules, this is used for blunt->calculation based on blunt_penetration value. The higher this is, the more blunt_force will be generated from "blocked" sharp_penetration. 1j = 1MPa
     sharp_penetration = 20, --sharp penetration is in mmRHA.
@@ -41,7 +41,7 @@ minetest.register_craftitem("guns4d_pack_1:45A", {
 })
 Guns4d.ammo.register_bullet({
     itemstring = "guns4d_pack_1:45A",
-    range = 200,
+    range = 400,
     energy_dropoff = 7,
     energy = 900,
     sharp_penetration = 4,

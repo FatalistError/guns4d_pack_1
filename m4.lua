@@ -79,6 +79,8 @@ Guns4d.gun:inherit({
             inventory_image_magless = "m4_inv_empty.png",
         },
         visuals = {
+            flash_offset = vector.new(0, -.11, 0),
+
             scale = 1.5,
             backface_culling = false,
             mesh = "m4.b3d",
@@ -181,7 +183,6 @@ Guns4d.gun:inherit({
                 player_axial = 1
             }
         },
-        flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             velocity_correction_factor = { --velocity correction factor is currently very broken.
                 gun_axial = 2,

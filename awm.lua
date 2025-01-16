@@ -49,6 +49,7 @@ Guns4d.gun:inherit({
     itemstring = "guns4d_pack_1:awm",
     properties = {
         visuals = {
+            flash_offset = vector.new(0, -.001, 0),
             scale = 1.5,
             backface_culling = false,
             mesh = "awm.b3d",
@@ -148,7 +149,6 @@ Guns4d.gun:inherit({
                 attenuation_rate = .85
             },
         },
-        flash_offset = vector.new(0, 0, 1.06),
         recoil = {
             velocity_correction_factor = { --I dont remember what this actually does
                 gun_axial = 4,

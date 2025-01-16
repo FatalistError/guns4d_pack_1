@@ -12,6 +12,7 @@ Guns4d.gun:inherit({
             render_size = 2,
         },
         visuals = {
+            flash_offset = vector.new(0, -.001, 0),
             scale = 1.5,
             mesh = "m1014.b3d",
             magazine = "mag",
@@ -88,7 +89,6 @@ Guns4d.gun:inherit({
                 player_axial = 1
             }
         },
-        flash_offset = vector.new(0, -.10787, .878),
         recoil = {
             velocity_correction_factor = {
                 gun_axial = 2,
